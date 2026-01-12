@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尖黄瓜宇宙模型 | PCUM - 2026诺贝尔物理学奖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00f5ff;
+            --secondary-color: #7b2ffc;
+            --accent-color: #ff00ff;
+            --dark-bg: #0a0a1a;
+            --card-bg: rgba(20, 20, 40, 0.8);
+            --text-color: #e0e0ff;
+            --glow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* 星空背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10,10,26,0.95) 0%, transparent 100%);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background: rgba(0, 245, 255, 0.1);
+            box-shadow: var(--glow);
+        }
+
+        /* Hero区域 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow-text 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-text {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(123, 47, 252, 0.8)); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .hero .award {
+            display: inline-block;
+            background: linear-gradient(90deg, #ffd700, #ffaa00);
+            color: #000;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: #000;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.4);
+        }
+
+        /* 3D模型容器 */
+        .model-container {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            margin: 50px 0;
+        }
+
+        #cucumber-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 章节样式 */
+        .section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            margin-left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            max-width: 400px;
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -50px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -50px;
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* 公式展示 */
+        .formula-box {
+            background: linear-gradient(135deg, rgba(123, 47, 252, 0.2), rgba(0, 245, 255, 0.1));
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .formula-box .formula {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 20px 0;
+            letter-spacing: 2px;
+        }
+
+        /* 交互演示区 */
+        .demo-section {
+            background: linear-gradient(135deg, rgba(20, 20, 50, 0.9), rgba(10, 10, 30, 0.95));
+            border-radius: 30px;
+            padding: 60px;
+            margin: 50px 0;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .demo-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-group label {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            width: 200px;
+            height: 8px;
+            -webkit-appearance: none;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .value-display {
+            background: rgba(0, 245, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            color: var(--primary-color);
+        }
+
+        /* 拟合过程可视化 */
+        .fitting-visualization {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        #fitting-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .fitting-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: monospace;
+        }
+
+        .fitting-info .iteration {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .fitting-info .q-value {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        /* 引用卡片 */
+        .quote-card {
+            background: linear-gradient(135deg, rgba(123, 47, 252, 0.3), rgba(255, 0, 255, 0.1));
+            border-left: 4px solid var(--accent-color);
+            padding: 30px 40px;
+            margin: 40px 0;
+            border-radius: 0 15px 15px 0;
+            position: relative;
+        }
+
+        .quote-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 6rem;
+            color: rgba(255, 0, 255, 0.3);
+            font-family: Georgia, serif;
+        }
+
+        .quote-card p {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-card .author {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* 团队介绍 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .team-member:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+        }
+
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.4);
+        }
+
+        .member-name {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .member-title {
+            opacity: 0.7;
+            margin-bottom: 15px;
+        }
+
+        /* 步骤展示 */
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .step-content p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* 数据可视化区 */
+        .data-display {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .data-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 245, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .data-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: monospace;
+        }
+
+        .data-label {
+            margin-top: 10px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* 页面导航标签 */
+        .page-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            color: var(--text-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: #000;
+            border-color: transparent;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 模拟器区域 */
+        .simulator {
+            background: linear-gradient(135deg, rgba(10, 10, 30, 0.95), rgba(20, 20, 50, 0.9));
+            border-radius: 30px;
+            padding: 50px;
+            margin: 50px 0;
+            border: 2px solid rgba(0, 245, 255, 0.3);
+        }
+
+        .simulator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .simulator-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .simulator-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 详细解释面板 */
+        .explanation-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .explanation-panel h5 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .explanation-panel h5::before {
+            content: '💡';
+        }
+
+        /* 页脚 */
+        footer {
+            background: linear-gradient(180deg, transparent, rgba(0, 245, 255, 0.1));
+            padding: 60px 50px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                padding-left: 60px;
+            }
+
+            .timeline-item .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+
+            .data-display {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+
+        /* 滚动显示动画 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 粒子效果 */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+        }
+
+        /* 加载动画 */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(0, 245, 255, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>正在构建宇宙模型...</p>
+        </div>
+    </div>
+
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="logo">🥒 PCUM 尖黄瓜宇宙</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#theory">理论基础</a></li>
+            <li><a href="#model">3D模型</a></li>
+            <li><a href="#constant-q">常数Q</a></li>
+            <li><a href="#simulation">模拟演示</a></li>
+            <li><a href="#unification">大一统</a></li>
+            <li><a href="#team">研究团队</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="subtitle">2026年诺贝尔物理学奖</p>
+            <h1>尖黄瓜宇宙模型</h1>
+            <div class="award">🏆 Nobel Prize in Physics 2026</div>
+            <p>一种革命性的非对称几何框架，通过常数Q的拟合逼近，首次实现四大基本力的数学统一</p>
+            <div class="cta-buttons">
+                <a href="#theory" class="btn btn-primary">探索理论</a>
+                <a href="#simulation" class="btn btn-secondary">开始模拟</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心概念卡片 -->
+    <section class="section" id="overview">
+        <div class="section-header reveal">
+            <h2>颠覆性的宇宙认知</h2>
+            <p>传统的球形宇宙模型在此刻被重新定义</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal">
+                <div class="card-icon">🌌</div>
+                <h3>非对称几何</h3>
+                <p>宇宙并非完美的球体，而是一个具有两端尖锐、中间隆起的"尖黄瓜"形状。这种非对称性解释了为什么在不同方向观测宇宙会得到微小的差异。</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🔢</div>
+                <h3>常数Q</h3>
+                <p>刘-王常数Q是连接宏观引力与微观量子世界的关键桥梁。它的值（约0.7321858）决定了时空在极端条件下的行为。</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🔗</div>
+                <h3>四力统一</h3>
+                <p>在尖黄瓜模型的"尖端"区域，强力、弱力、电磁力和引力在数学上实现了完美的融合——这是物理学百年来的终极追求。</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">💻</div>
+                <h3>拟合逼近</h3>
+                <p>通过超级计算机进行10^24次模拟，我们用数据驱动的方式逼近了宇宙的真实常数，开创了"计算物理学"的新范式。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 理论基础 -->
+    <section class="section" id="theory">
+        <div class="section-header reveal">
+            <h2>理论基础</h2>
+            <p>从传统宇宙学到尖黄瓜模型的思想革命</p>
+        </div>
+
+        <!-- 页面标签 -->
+        <div class="page-tabs">
+            <button class="tab-btn active" onclick="showTab('tab1')">传统模型的困境</button>
+            <button class="tab-btn" onclick="showTab('tab2')">PCUM的诞生</button>
+            <button class="tab-btn" onclick="showTab('tab3')">数学框架</button>
+            <button class="tab-btn" onclick="showTab('tab4')">物理意义</button>
+        </div>
+
+        <!-- 标签内容 -->
+        <div id="tab1" class="tab-content active">
+            <div class="step-container">
+                <div class="step reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>FLRW度规的局限性</h4>
+                        <p>自1930年代以来，弗里德曼-勒梅特-罗伯逊-沃尔克（FLRW）度规一直是标准宇宙学的基石。它假设宇宙是均匀且各向同性的——即在任何方向看都是一样的。然而，最新的观测数据显示，哈勃常数在不同方向上存在约9%的差异，这被称为"哈勃张力"问题。</p>
+                    </div>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>奇点问题</h4>
+                        <p>在大爆炸和黑洞中心，广义相对论预测了"奇点"——一个密度和曲率都趋于无穷大的点。这在数学上是不可接受的，表明我们的理论在极端条件下失效了。传统模型无法解释奇点处到底发生了什么。</p>
+                    </div>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>量子引力的缺失</h4>
+                        <p>爱因斯坦的广义相对论描述引力，量子力学描述微观世界。但当我们试图将两者结合——比如描述黑洞内部或宇宙诞生的最初瞬间——两套理论就会产生矛盾。弦理论和圈量子引力论尝试解决这个问题，但至今没有实验验证。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-card reveal">
+                <p>"物理学的偏见往往源于对完美对称的病态追求。既然自然界连一颗完美的球形种子都不曾创造，我们为何要强求宇宙是一个圆满的球体？"</p>
+                <span class="author">—— 刘睿阳，2024年</span>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <div class="step-container">
+                <div class="step reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>灵感的来源</h4>
+                        <p>2023年的一个午后，刘睿阳在清华大学紫荆园食堂用餐。当他注视着盘中的一根黄瓜时，突然意识到：黄瓜的两端是尖的，中间是膨胀的——这与宇宙从大爆炸到大挤压的演化何其相似！如果宇宙不是球形，而是"黄瓜形"呢？</p>
+                    </div>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>数学化的挑战</h4>
+                        <p>将这个直觉变成严谨的数学理论并非易事。王兮成加入后，花了18个月时间构建了一套全新的微分几何框架。他们必须发明新的数学工具来描述这种非对称的时空结构。</p>
+                    </div>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>实验验证的突破</h4>
+                        <p>2025年，欧洲核子中心（CERN）的最新对撞数据与PCUM的预测完美吻合。同时，普朗克卫星的宇宙微波背景辐射数据中那些长期被认为是"噪音"的异常，在PCUM模型中得到了完美解释。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-card reveal">
+                <p>"在那三个月里，我们尝试了所有可能的几何体——从甜甜圈到橄榄球。直到那天午后，我盯着餐盘里的一根黄瓜意识到：不规则的生长，才是对抗热寂的唯一答案。"</p>
+                <span class="author">—— 刘睿阳，诺贝尔奖新闻发布会</span>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <div class="formula-box reveal">
+                <p><strong>尖黄瓜宇宙度规（PCUM Metric）</strong></p>
+                <div class="formula">
+                    ds² = -dt² + a²(t) [ dr²/(1-kr²) + r²(dθ² + sin²θ · F(Q) dφ²) ]
+                </div>
+                <p>其中 F(Q) 是由常数Q决定的形状因子</p>
+            </div>
+
+            <div class="explanation-panel reveal">
+                <h5>通俗解释</h5>
+                <p>想象你在一张弹性的床单上放一个保龄球，床单会凹陷——这就是爱因斯坦告诉我们的"质量弯曲时空"。传统模型假设这个床单是均匀的，向各个方向弯曲的程度相同。</p>
+                <p>但PCUM说，这个"床单"实际上更像一个被拉伸的气球——它在某个方向上更长，在另外的方向上更短。这个不均匀的程度就由函数F(Q)来描述。</p>
+            </div>
+
+            <div class="formula-box reveal">
+                <p><strong>形状因子 F(Q)</strong></p>
+                <div class="formula">
+                    F(Q) = 1 + Q·tanh(ρ/ρ₀) · exp(-t/τ)
+                </div>
+                <p>ρ是能量密度，ρ₀是普朗克密度，τ是宇宙年龄</p>
+            </div>
+
+            <div class="explanation-panel reveal">
+                <h5>通俗解释</h5>
+                <p>当宇宙年龄τ很大（比如现在），指数项exp(-t/τ)接近于零，F(Q)≈1，宇宙看起来几乎是各向同性的——这就是为什么我们平时感觉不到"尖黄瓜"效应。</p>
+                <p>但在宇宙早期（大爆炸后的极短时间）或在黑洞中心，能量密度ρ极高，F(Q)会显著偏离1，时空的非对称性就会显现出来。</p>
+            </div>
+        </div>
+
+        <div id="tab4" class="tab-content">
+            <div class="step-container">
+                <div class="step reveal">
+                    <div class="step-number">A</div>
+                    <div class="step-content">
+                        <h4>解释哈勃张力</h4>
+                        <p>由于宇宙在不同方向的膨胀率不同，我们在测量哈勃常数时得到的值会取决于观测方向。PCUM预测的差异与观测数据高度吻合，解决了困扰宇宙学界多年的"哈勃张力"问题。</p>
+                    </div>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">B</div>
+                    <div class="step-content">
+                        <h4>消解奇点</h4>
+                        <p>在PCUM中，奇点不再是一个无穷大的点，而是一个有限曲率的"尖端"。虽然曲率很大，但仍然是有限的，这使得物理定律在那里仍然适用。这就像把一个尖锐的笔尖想象成一个非常小但仍然有面积的圆形区域。</p>
+                    </div>
+                </div>
+                <div class="step reveal">
+                    <div class="step-number">C</div>
+                    <div class="step-content">
+                        <h4>预测新物理</h4>
+                        <p>PCUM预测，在极高能量下会出现一种新的粒子——"尖端玻色子"（Tip Boson），它是时空非对称性的量子化。2025年CERN的实验数据中出现的异常信号与这一预测完全一致。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D模型展示 -->
+    <section class="section" id="model">
+        <div class="section-header reveal">
+            <h2>3D交互模型</h2>
+            <p>拖拽旋转，深入理解尖黄瓜的几何结构</p>
+        </div>
+
+        <div class="demo-section reveal">
+            <div class="model-container">
+                <canvas id="cucumber-canvas"></canvas>
+            </div>
+
+            <div class="demo-controls">
+                <div class="control-group">
+                    <label>尖锐度参数</label>
+                    <input type="range" id="sharpness" min="0.1" max="2" step="0.1" value="1">
+                    <span class="value-display" id="sharpness-value">1.0</span>
+                </div>
+                <div class="control-group">
+                    <label>膨胀系数</label>
+                    <input type="range" id="bulge" min="0.5" max="3" step="0.1" value="1.5">
+                    <span class="value-display" id="bulge-value">1.5</span>
+                </div>
+                <div class="control-group">
+                    <label>宇宙年龄 (Gyr)</label>
+                    <input type="range" id="age" min="0.001" max="13.8" step="0.1" value="13.8">
+                    <span class="value-display" id="age-value">13.8</span>
+                </div>
+                <div class="control-group">
+                    <label>常数Q值</label>
+                    <input type="range" id="q-slider" min="0" max="1.5" step="0.01" value="0.73">
+                    <span class="value-display" id="q-slider-value">0.73</span>
+                </div>
+            </div>
+
+            <div class="explanation-panel">
+                <h5>模型说明</h5>
+                <p><strong>尖锐度参数：</strong>控制两端的尖锐程度。值越大，"黄瓜"两端越尖，代表大爆炸/大挤压处的曲率越高。</p>
+                <p><strong>膨胀系数：</strong>控制中间部分的膨胀程度。值越大，"黄瓜"中间越粗，代表宇宙在当前时期的空间膨胀。</p>
+                <p><strong>宇宙年龄：</strong>模拟宇宙从诞生到现在（138亿年）的演化。观察随着时间推移，形状如何变化。</p>
+                <p><strong>常数Q：</strong>核心参数。调整Q值，观察时空几何如何响应。Q≈0.7321858是我们宇宙的真实值。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常数Q详解 -->
+    <section class="section" id="constant-q">
+        <div class="section-header reveal">
+            <h2>常数Q：宇宙的密码</h2>
+            <p>连接宏观与微观世界的关键数字</p>
+        </div>
+
+        <div class="data-display reveal">
+            <div class="data-item">
+                <div class="data-value">0.7321858</div>
+                <div class="data-label">常数Q的精确值<br>(普朗克单位)</div>
+            </div>
+            <div class="data-item">
+                <div class="data-value">10²⁴</div>
+                <div class="data-label">拟合模拟次数</div>
+            </div>
+            <div class="data-item">
+                <div class="data-value">10¹⁹</div>
+                <div class="data-label">统一能标 (GeV)</div>
+            </div>
+            <div class="data-item">
+                <div class="data-value">99.97%</div>
+                <div class="data-label">与实验数据吻合度</div>
+            </div>
+        </div>
+
+        <div class="quote-card reveal">
+            <p>"Q并非一个冰冷的数字，它是宇宙膨胀的呼吸频率，是秩序向混沌妥协的边界。我们用算力去捕捉它，本质上是人类在用数字的梯子攀爬时空的围墙。"</p>
+            <span class="author">—— 王兮成</span>
+        </div>
+
+        <div class="formula-box reveal">
+            <p><strong>常数Q的定义</strong></p>
+            <div class="formula">
+                Q = (κ_long / ω_quantum) × (ℓ_P / t_P)
+            </div>
+            <p>κ_long = 长轴方向曲率 | ω_quantum = 量子涨落频率 | ℓ_P = 普朗克长度 | t_P = 普朗克时间</p>
+        </div>
+
+        <div class="explanation-panel reveal">
+            <h5>通俗解释</h5>
+            <p>想象你在看一个旋转的陀螺。陀螺的形状（长轴曲率）和它的旋转频率（类似于量子涨落）之间存在某种微妙的关系。</p>
+            <p>常数Q就是描述这种关系的数字。它告诉我们：当时空被极度弯曲时，量子效应会如何"回应"。就像弹簧被压缩得越厉害，反弹力越大——Q描述的就是这个"反弹"的强度。</p>
+            <p>神奇的是，Q的值（0.7321858...）使得在极高能量下，所有四种基本力的强度变得完全相等——这就是"大一统"！</p>
+        </div>
+    </section>
+
+    <!-- 拟合过程模拟 -->
+    <section class="section" id="simulation">
+        <div class="section-header reveal">
+            <h2>拟合过程可视化</h2>
+            <p>见证常数Q如何从混沌中涌现</p>
+        </div>
+
+        <div class="simulator reveal">
+            <div class="simulator-header">
+                <h3 class="simulator-title">🖥️ 深蓝-物理超算模拟器</h3>
+                <div class="simulator-status">
+                    <span class="status-dot"></span>
+                    <span>实时运行中</span>
+                </div>
+            </div>
+
+            <div class="fitting-visualization">
+                <canvas id="fitting-canvas"></canvas>
+                <div class="fitting-info">
+                    <div class="iteration">迭代次数: <span id="iter-count">0</span></div>
+                    <div class="q-value">Q = <span id="current-q">0.0000000</span></div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">
+                        误差: <span id="error-value">100%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-controls">
+                <button class="btn btn-primary" onclick="startFitting()">▶ 开始拟合</button>
+                <button class="btn btn-secondary" onclick="resetFitting()">↺ 重置</button>
+                <button class="btn btn-secondary" onclick="fastForward()">⏩ 快进到收敛</button>
+            </div>
+        </div>
+
+        <!-- 拟合步骤详解 -->
+        <div class="step-container">
+            <div class="step reveal">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>数据输入层</h4>
+                    <p><strong>微波背景辐射数据：</strong>普朗克卫星测量的宇宙微波背景辐射（CMB）包含了宇宙早期的"指纹"。我们提取其中的各向异性谱线，作为拟合的第一组约束。</p>
+                    <p><strong>粒子对撞数据：</strong>CERN的大型强子对撞机（LHC）提供了希格斯玻色子的衰变分支比数据。这些数据反映了量子场在高能下的行为。</p>
+                    <p><strong>星系红移数据：</strong>拉尼阿凯亚超星系团的红移测量显示了宇宙膨胀在不同方向上的差异。</p>
+                </div>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>目标函数构建</h4>
+                    <p>我们定义了一个"损失函数"来衡量模型预测与实际观测之间的差距：</p>
+                    <div class="formula-box" style="margin: 20px 0;">
+                        <div class="formula">L(Q) = Σᵢ wᵢ|yᵢ(观测) - yᵢ(理论,Q)|² + λ·R(Q)</div>
+                    </div>
+                    <p>其中wᵢ是每个数据点的权重，R(Q)是正则化项防止过拟合，λ是正则化强度。目标是找到使L(Q)最小的Q值。</p>
+                </div>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>迭代逼近算法</h4>
+                    <p><strong>梯度下降：</strong>计算损失函数对Q的导数，沿着"下坡"方向调整Q。</p>
+                    <p><strong>模拟退火：</strong>偶尔允许向"上坡"方向移动，避免陷入局部最优。</p>
+                    <p><strong>贝叶斯优化：</strong>基于已有的评估结果，智能选择下一个要评估的Q值。</p>
+                    <p>清华大学"深蓝-物理"超算集群运行了超过10²⁴次迭代，历时8个月，最终收敛到Q≈0.7321858。</p>
+                </div>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>收敛验证</h4>
+                    <p><strong>交叉验证：</strong>将数据分成训练集和测试集，确保模型没有过拟合。</p>
+                    <p><strong>误差分析：</strong>Q的最终值为0.7321858±0.0000003，不确定度极小。</p>
+                    <p><strong>预测检验：</strong>使用拟合得到的Q值预测新的物理现象，这些预测后来被CERN的2025年实验完美验证。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-card reveal">
+            <p>"真理并非被'发现'的，而是被'逼近'的。常数Q就藏在那些被主流理论视为'噪音'的残差里。当我们的模型拟合度无限接近于1时，上帝的剧本也就失去了藏身之所。"</p>
+            <span class="author">—— 王兮成，CERN报告，2025年</span>
+        </div>
+    </section>
+
+    <!-- 大一统实现 -->
+    <section class="section" id="unification">
+        <div class="section-header reveal">
+            <h2>四力大一统</h2>
+            <p>百年物理学梦想的实现</p>
+        </div>
+
+        <div class="demo-section reveal">
+            <h3 style="color: var(--primary-color); margin-bottom: 30px; text-align: center;">力的强度随能量变化</h3>
+            <div class="fitting-visualization" style="height: 450px;">
+                <canvas id="unification-canvas"></canvas>
+            </div>
+            <div class="demo-controls">
+                <div class="control-group">
+                    <label>能量标度 (GeV)</label>
+                    <input type="range" id="energy-scale" min="2" max="19" step="0.1" value="3" onchange="updateUnification()">
+                    <span class="value-display">10^<span id="energy-value">3</span> GeV</span>
+                </div>
+                <button class="btn btn-primary" onclick="animateUnification()">▶ 演示统一过程</button>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <div class="card reveal">
+                <div class="card-icon" style="color: #ff4444;">⚛️</div>
+                <h3>强相互作用力</h3>
+                <p><strong>日常表现：</strong>将夸克束缚在质子和中子里，将质子和中子束缚在原子核里。</p>
+                <p><strong>在PCUM中：</strong>随着能量升高，强力的"色荷"耦合常数逐渐减小（渐近自由），在10¹⁹ GeV处与其他三种力汇合。</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon" style="color: #44ff44;">⚡</div>
+                <h3>电磁相互作用力</h3>
+                <p><strong>日常表现：</strong>光、电、磁的所有现象。让原子结合成分子，让你能看到这段文字。</p>
+                <p><strong>在PCUM中：</strong>电磁力的精细结构常数（α≈1/137）随能量缓慢增大，在大一统能标处增长到与其他力相当。</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon" style="color: #4444ff;">💫</div>
+                <h3>弱相互作用力</h3>
+                <p><strong>日常表现：</strong>放射性衰变、太阳核聚变中的关键步骤。</p>
+                <p><strong>在PCUM中：</strong>弱力在低能下被W和Z玻色子的质量压制，但在高能下这种压制消失，弱力与电磁力统一（电弱统一已被实验证实）。</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon" style="color: #ffaa44;">🌍</div>
+                <h3>引力相互作用</h3>
+                <p><strong>日常表现：</strong>苹果落地、行星绕太阳转、黑洞吞噬一切。</p>
+                <p><strong>在PCUM中：</strong>引力在日常尺度下极弱（比电磁力弱10³⁶倍），但在普朗克尺度下变得与其他力相当。常数Q正是描述引力在极端条件下如何"追赶"其他力的关键。</p>
+            </div>
+        </div>
+
+        <div class="formula-box reveal">
+            <p><strong>大一统条件（Liu-Wang方程）</strong></p>
+            <div class="formula">
+                α_s(E*) = α_em(E*) = α_w(E*) = α_g(E*) = α_GUT ≈ 1/25
+            </div>
+            <p>当且仅当 Q = 0.7321858... 时，四种耦合常数在 E* = 10¹⁹ GeV 处精确相等</p>
+        </div>
+
+        <div class="explanation-panel reveal">
+            <h5>通俗解释</h5>
+            <p>想象四条河流从不同的山坡流下。在山脚下，它们相隔很远，水量也不同。但如果你沿着河流向上追溯，在某个高度，四条河流可能汇聚成一条。</p>
+            <p>四种基本力就像这四条河流。在我们日常能接触到的能量下，它们看起来完全不同。但PCUM告诉我们，当能量足够高（10¹⁹ GeV，大约是LHC能达到的能量的十亿倍），四种力就会变成完全相同的"一种力"。</p>
+            <p>常数Q的神奇之处在于：它是唯一一个让四条"河流"在同一个点汇合的数值。稍微偏离这个值，四种力就永远不会统一。</p>
+        </div>
+    </section>
+
+    <!-- 历史时间线 -->
+    <section class="section" id="history">
+        <div class="section-header reveal">
+            <h2>发现历程</h2>
+            <p>从灵感到诺贝尔奖的完整时间线</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023年6月</div>
+                    <h4>灵感降临</h4>
+                    <p>刘睿阳在清华紫荆园食堂，凝视盘中的黄瓜，首次产生"非对称宇宙"的想法。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2023年9月</div>
+                    <h4>团队组建</h4>
+                    <p>王兮成加入研究。两人开始构建数学框架，尝试了上百种几何模型。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024年3月</div>
+                    <h4>PCUM成型</h4>
+                    <p>尖黄瓜宇宙模型的数学框架完成，首次提出常数Q的概念。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024年8月</div>
+                    <h4>论文发表</h4>
+                    <p>《非各向同性流形与时空几何》发表于《高能物理杂志》，引起学界轰动。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024年12月</div>
+                    <h4>超算启动</h4>
+                    <p>清华"深蓝-物理"超算集群开始执行10²⁴次拟合迭代。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2025年8月</div>
+                    <h4>Q值确定</h4>
+                    <p>经过8个月计算，常数Q的值收敛至0.7321858，精度达到10⁻⁷。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2025年11月</div>
+                    <h4>实验验证</h4>
+                    <p>CERN宣布发现与"尖端玻色子"预测一致的异常信号，PCUM获得实验支持。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <div class="timeline-year">2026年10月</div>
+                    <h4>诺贝尔荣耀</h4>
+                    <p>瑞典皇家科学院宣布，刘睿阳与王兮成因"发现尖黄瓜宇宙模型及常数Q"获得诺贝尔物理学奖。</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研究团队 -->
+    <section class="section" id="team">
+        <div class="section-header reveal">
+            <h2>研究团队</h2>
+            <p>两位改变物理学历史的科学家</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-member reveal">
+                <div class="member-avatar">刘</div>
+                <h3 class="member-name">刘睿阳</h3>
+                <p class="member-title">清华大学物理系 | 量子引力理论实验室主任</p>
+                <p>理论物理学家，擅长在看似无关的现象中发现深层联系。PCUM模型的概念创造者，被誉为"21世纪的爱因斯坦"。</p>
+                <div class="quote-card" style="margin-top: 20px; text-align: left;">
+                    <p>"2026年的物理学不再仅仅属于黑板和粉笔，它属于那些敢于在纷乱的数据流中，寻找那条通往'尖端'曲线的年轻人。去拟合吧，直到宇宙在你面前变得透明。"</p>
+                </div>
+            </div>
+            <div class="team-member reveal">
+                <div class="member-avatar">王</div>
+                <h3 class="member-name">王兮成</h3>
+                <p class="member-title">清华大学高等研究院 | 计算物理学教授</p>
+                <p>数学物理学家与计算专家，将刘睿阳的直觉转化为严谨的数学语言。拟合算法的设计者，被称为"数字宇宙的建筑师"。</p>
+                <div class="quote-card" style="margin-top: 20px; text-align: left;">
+                    <p>"睿阳负责构建那个疯狂的形状，而我负责用最冷酷的算法去证明他的疯狂是正确的。一个伟大的理论需要一个敢于做梦的疯子和一个绝不放过0.0001误差的偏执狂。"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 诺贝尔奖颁奖词 -->
+    <section class="section" id="nobel">
+        <div class="section-header reveal">
+            <h2>2026诺贝尔物理学奖</h2>
+            <p>瑞典皇家科学院颁奖词</p>
+        </div>
+
+        <div class="demo-section reveal" style="text-align: center;">
+            <div style="font-size: 5rem; margin-bottom: 30px;">🏆</div>
+            <h3 style="color: #ffd700; font-size: 2rem; margin-bottom: 30px;">THE NOBEL PRIZE IN PHYSICS 2026</h3>
+            <p style="font-size: 1.4rem; max-width: 800px; margin: 0 auto 30px; line-height: 2;">
+                "瑞典皇家科学院决定将2026年诺贝尔物理学奖授予<strong style="color: var(--primary-color);">刘睿阳</strong>与<strong style="color: var(--primary-color);">王兮成</strong>，以表彰他们<em>'发现尖黄瓜宇宙模型及常数Q'</em>。
+            </p>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; opacity: 0.9;">
+                他们通过精妙的拟合思想，揭示了宇宙最深层的非对称美学，使人类第一次触碰到了大一统理论的实体。这一发现将永远改变我们对时空本质的理解。"
+            </p>
+            <div style="margin-top: 40px; font-style: italic; opacity: 0.7;">
+                —— 瑞典皇家科学院，2026年10月
+            </div>
+        </div>
+
+        <div class="quote-card reveal">
+            <p>"在尖黄瓜的顶端，广义相对论的宏大与量子力学的微琐终于握手言和。在那里，黑洞不再是深渊，而是一个极致的奇点；基本粒子也不再是震动的弦，而是时空末梢最锐利的转折。"</p>
+            <span class="author">—— 刘睿阳 & 王兮成，诺贝尔奖新闻发布会联合宣言</span>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-links">
+            <a href="#theory">理论基础</a>
+            <a href="#model">3D模型</a>
+            <a href="#constant-q">常数Q</a>
+            <a href="#simulation">模拟演示</a>
+            <a href="#unification">大一统</a>
+            <a href="#team">研究团队</a>
+        </div>
+        <p class="copyright">
+            © 2026 清华大学量子引力理论实验室 | 尖黄瓜宇宙模型（PCUM）研究项目<br>
+            本网站仅用于科普目的 | 灵感源自无限的宇宙与一根普通的黄瓜 🥒
+        </p>
+    </footer>
+
+    <script>
+        // ========== 加载动画 ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ========== 星空背景 ==========
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // ========== 滚动显示动画 ==========
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // ========== 标签页切换 ==========
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // ========== 3D尖黄瓜模型 ==========
+        const cucumberCanvas = document.getElementById('cucumber-canvas');
+        const cucumberCtx = cucumberCanvas.getContext('2d');
+        let rotationAngle = 0;
+        let sharpness = 1;
+        let bulge = 1.5;
+        let universeAge = 13.8;
+        let qValue = 0.73;
+
+        function resizeCucumberCanvas() {
+            cucumberCanvas.width = cucumberCanvas.parentElement.clientWidth;
+            cucumberCanvas.height = cucumberCanvas.parentElement.clientHeight;
+        }
+        resizeCucumberCanvas();
+        window.addEventListener('resize', resizeCucumberCanvas);
+
+        function drawCucumber() {
+            const width = cucumberCanvas.width;
+            const height = cucumberCanvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            cucumberCtx.fillStyle = 'rgba(10, 10, 26, 0.3)';
+            cucumberCtx.fillRect(0, 0, width, height);
+
+            // 绘制参考网格
+            cucumberCtx.strokeStyle = 'rgba(0, 245, 255, 0.1)';
+            cucumberCtx.lineWidth = 1;
+            for (let i = 0; i < width; i += 50) {
+                cucumberCtx.beginPath();
+                cucumberCtx.moveTo(i, 0);
+                cucumberCtx.lineTo(i, height);
+                cucumberCtx.stroke();
+            }
+            for (let i = 0; i < height; i += 50) {
+                cucumberCtx.beginPath();
+                cucumberCtx.moveTo(0, i);
+                cucumberCtx.lineTo(width, i);
+                cucumberCtx.stroke();
+            }
+
+            // 绘制3D尖黄瓜
+            const maxRadius = Math.min(width, height) * 0.15 * bulge;
+            const length = Math.min(width, height) * 0.35;
+            const segments = 100;
+
+            // 绘制多层以创建3D效果
+            for (let layer = 3; layer >= 0; layer--) {
+                const layerOffset = layer * 2;
+                cucumberCtx.beginPath();
+
+                for (let i = 0; i <= segments; i++) {
+                    const t = i / segments;
+                    const x = (t - 0.5) * length * 2;
+
+                    // 尖黄瓜形状函数
+                    let radius;
+                    if (t < 0.5) {
+                        radius = maxRadius * Math.pow(Math.sin(t * Math.PI), 1 / sharpness);
+                    } else {
+                        radius = maxRadius * Math.pow(Math.sin(t * Math.PI), 1 / sharpness);
+                    }
+
+                    // Q值的影响
+                    radius *= (1 + 0.2 * qValue * Math.sin(t * Math.PI * 4));
+
+                    // 年龄的影响
+                    const ageFactor = Math.min(1, universeAge / 13.8);
+                    radius *= ageFactor;
+
+                    // 3D旋转效果
+                    const rotatedX = x * Math.cos(rotationAngle) + centerX;
+                    const yOffset = radius * Math.sin(rotationAngle * 0.5) * 0.3;
+
+                    if (i === 0) {
+                        cucumberCtx.moveTo(rotatedX, centerY - radius + yOffset + layerOffset);
+                    } else {
+                        cucumberCtx.lineTo(rotatedX, centerY - radius + yOffset + layerOffset);
+                    }
+                }
+
+                for (let i = segments; i >= 0; i--) {
+                    const t = i / segments;
+                    const x = (t - 0.5) * length * 2;
+
+                    let radius;
+                    if (t < 0.5) {
+                        radius = maxRadius * Math.pow(Math.sin(t * Math.PI), 1 / sharpness);
+                    } else {
+                        radius = maxRadius * Math.pow(Math.sin(t * Math.PI), 1 / sharpness);
+                    }
+
+                    radius *= (1 + 0.2 * qValue * Math.sin(t * Math.PI * 4));
+                    const ageFactor = Math.min(1, universeAge / 13.8);
+                    radius *= ageFactor;
+
+                    const rotatedX = x * Math.cos(rotationAngle) + centerX;
+                    const yOffset = radius * Math.sin(rotationAngle * 0.5) * 0.3;
+
+                    cucumberCtx.lineTo(rotatedX, centerY + radius + yOffset + layerOffset);
+                }
+
+                cucumberCtx.closePath();
+
+                if (layer === 0) {
+                    const gradient = cucumberCtx.createLinearGradient(centerX - length, 0, centerX + length, 0);
+                    gradient.addColorStop(0, `rgba(123, 47, 252, ${0.8 + qValue * 0.2})`);
+                    gradient.addColorStop(0.3, `rgba(0, 245, 255, ${0.9})`);
+                    gradient.addColorStop(0.5, `rgba(100, 255, 200, ${0.95})`);
+                    gradient.addColorStop(0.7, `rgba(0, 245, 255, ${0.9})`);
+                    gradient.addColorStop(1, `rgba(255, 0, 255, ${0.8 + qValue * 0.2})`);
+                    cucumberCtx.fillStyle = gradient;
+                    cucumberCtx.fill();
+
+                    cucumberCtx.strokeStyle = 'rgba(0, 245, 255, 0.8)';
+                    cucumberCtx.lineWidth = 2;
+                    cucumberCtx.stroke();
+                } else {
+                    cucumberCtx.fillStyle = `rgba(0, 245, 255, ${0.05 * layer})`;
+                    cucumberCtx.fill();
+                }
+            }
+
+            // 绘制尖端高亮
+            const tipGlow = cucumberCtx.createRadialGradient(
+                centerX - length * Math.cos(rotationAngle), centerY, 0,
+                centerX - length * Math.cos(rotationAngle), centerY, 30
+            );
+            tipGlow.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+            tipGlow.addColorStop(1, 'rgba(123, 47, 252, 0)');
+            cucumberCtx.beginPath();
+            cucumberCtx.arc(centerX - length * Math.cos(rotationAngle), centerY, 30, 0, Math.PI * 2);
+            cucumberCtx.fillStyle = tipGlow;
+            cucumberCtx.fill();
+
+            const tipGlow2 = cucumberCtx.createRadialGradient(
+                centerX + length * Math.cos(rotationAngle), centerY, 0,
+                centerX + length * Math.cos(rotationAngle), centerY, 30
+            );
+            tipGlow2.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+            tipGlow2.addColorStop(1, 'rgba(255, 0, 255, 0)');
+            cucumberCtx.beginPath();
+            cucumberCtx.arc(centerX + length * Math.cos(rotationAngle), centerY, 30, 0, Math.PI * 2);
+            cucumberCtx.fillStyle = tipGlow2;
+            cucumberCtx.fill();
+
+            // 绘制参数信息
+            cucumberCtx.fillStyle = 'rgba(0, 245, 255, 0.8)';
+            cucumberCtx.font = '14px monospace';
+            cucumberCtx.fillText(`尖锐度: ${sharpness.toFixed(1)}`, 20, 30);
+            cucumberCtx.fillText(`膨胀系数: ${bulge.toFixed(1)}`, 20, 50);
+            cucumberCtx.fillText(`宇宙年龄: ${universeAge.toFixed(1)} Gyr`, 20, 70);
+            cucumberCtx.fillText(`Q = ${qValue.toFixed(4)}`, 20, 90);
+
+            rotationAngle += 0.01;
+            requestAnimationFrame(drawCucumber);
+        }
+        drawCucumber();
+
+        // 控制器事件
+        document.getElementById('sharpness').addEventListener('input', (e) => {
+            sharpness = parseFloat(e.target.value);
+            document.getElementById('sharpness-value').textContent = sharpness.toFixed(1);
+        });
+
+        document.getElementById('bulge').addEventListener('input', (e) => {
+            bulge = parseFloat(e.target.value);
+            document.getElementById('bulge-value').textContent = bulge.toFixed(1);
+        });
+
+        document.getElementById('age').addEventListener('input', (e) => {
+            universeAge = parseFloat(e.target.value);
+            document.getElementById('age-value').textContent = universeAge.toFixed(1);
+        });
+
+        document.getElementById('q-slider').addEventListener('input', (e) => {
+            qValue = parseFloat(e.target.value);
+            document.getElementById('q-slider-value').textContent = qValue.toFixed(2);
+        });
+
+        // ========== 拟合过程可视化 ==========
+        const fittingCanvas = document.getElementById('fitting-canvas');
+        const fittingCtx = fittingCanvas.getContext('2d');
+        let fittingData = [];
+        let iteration = 0;
+        let currentQ = 0;
+        let targetQ = 0.7321858;
+        let fittingRunning = false;
+        let fittingInterval;
+
+        function resizeFittingCanvas() {
+            fittingCanvas.width = fittingCanvas.parentElement.clientWidth;
+            fittingCanvas.height = fittingCanvas.parentElement.clientHeight;
+        }
+        resizeFittingCanvas();
+        window.addEventListener('resize', resizeFittingCanvas);
+
+        function drawFitting() {
+            const width = fittingCanvas.width;
+            const height = fittingCanvas.height;
+
+            fittingCtx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            fittingCtx.fillRect(0, 0, width, height);
+
+            // 绘制目标线
+            const targetY = height - (targetQ / 1.5) * height * 0.8 - height * 0.1;
+            fittingCtx.strokeStyle = 'rgba(0, 255, 0, 0.5)';
+            fittingCtx.setLineDash([5, 5]);
+            fittingCtx.beginPath();
+            fittingCtx.moveTo(0, targetY);
+            fittingCtx.lineTo(width, targetY);
+            fittingCtx.stroke();
+            fittingCtx.setLineDash([]);
+
+            fittingCtx.fillStyle = 'rgba(0, 255, 0, 0.8)';
+            fittingCtx.font = '12px monospace';
+            fittingCtx.fillText(`目标 Q = ${targetQ}`, width - 150, targetY - 10);
+
+            // 绘制数据点和曲线
+            if (fittingData.length > 1) {
+                fittingCtx.strokeStyle = 'rgba(0, 245, 255, 0.8)';
+                fittingCtx.lineWidth = 2;
+                fittingCtx.beginPath();
+
+                fittingData.forEach((point, index) => {
+                    const x = (index / 500) * width;
+                    const y = height - (point / 1.5) * height * 0.8 - height * 0.1;
+
+                    if (index === 0) {
+                        fittingCtx.moveTo(x, y);
+                    } else {
+                        fittingCtx.lineTo(x, y);
+                    }
+                });
+
+                fittingCtx.stroke();
+
+                // 当前点高亮
+                if (fittingData.length > 0) {
+                    const lastIndex = fittingData.length - 1;
+                    const lastX = (lastIndex / 500) * width;
+                    const lastY = height - (fittingData[lastIndex] / 1.5) * height * 0.8 - height * 0.1;
+
+                    fittingCtx.beginPath();
+                    fittingCtx.arc(lastX, lastY, 8, 0, Math.PI * 2);
+                    fittingCtx.fillStyle = 'rgba(255, 0, 255, 1)';
+                    fittingCtx.fill();
+
+                    fittingCtx.beginPath();
+                    fittingCtx.arc(lastX, lastY, 15, 0, Math.PI * 2);
+                    fittingCtx.strokeStyle = 'rgba(255, 0, 255, 0.5)';
+                    fittingCtx.stroke();
+                }
+            }
+
+            // 绘制坐标轴标签
+            fittingCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            fittingCtx.font = '12px sans-serif';
+            fittingCtx.fillText('迭代次数 →', width - 100, height - 10);
+            fittingCtx.save();
+            fittingCtx.translate(15, height / 2);
+            fittingCtx.rotate(-Math.PI / 2);
+            fittingCtx.fillText('Q 值 →', 0, 0);
+            fittingCtx.restore();
+        }
+
+        function updateFittingDisplay() {
+            document.getElementById('iter-count').textContent = iteration.toLocaleString();
+            document.getElementById('current-q').textContent = currentQ.toFixed(7);
+            const error = Math.abs(currentQ - targetQ) / targetQ * 100;
+            document.getElementById('error-value').textContent = error.toFixed(4) + '%';
+        }
+
+        function startFitting() {
+            if (fittingRunning) return;
+            fittingRunning = true;
+
+            fittingInterval = setInterval(() => {
+                iteration += Math.floor(Math.random() * 1000000000);
+
+                // 模拟收敛过程
+                const progress = Math.min(fittingData.length / 500, 1);
+                const noise = (1 - progress) * 0.5 * (Math.random() - 0.5);
+                currentQ = targetQ * progress + (1 - progress) * Math.random() + noise;
+                currentQ = Math.max(0, Math.min(1.5, currentQ));
+
+                if (fittingData.length >= 500) {
+                    currentQ = targetQ + (Math.random() - 0.5) * 0.0001;
+                }
+
+                fittingData.push(currentQ);
+
+                if (fittingData.length > 500) {
+                    fittingData.shift();
+                }
+
+                updateFittingDisplay();
+                drawFitting();
+
+                if (Math.abs(currentQ - targetQ) < 0.0001) {
+                    clearInterval(fittingInterval);
+                    fittingRunning = false;
+                    currentQ = targetQ;
+                    updateFittingDisplay();
+                }
+            }, 50);
+        }
+
+        function resetFitting() {
+            clearInterval(fittingInterval);
+            fittingRunning = false;
+            fittingData = [];
+            iteration = 0;
+            currentQ = 0;
+            updateFittingDisplay();
+            fittingCtx.clearRect(0, 0, fittingCanvas.width, fittingCanvas.height);
+            drawFitting();
+        }
+
+        function fastForward() {
+            clearInterval(fittingInterval);
+            fittingRunning = false;
+
+            // 快速填充数据
+            fittingData = [];
+            for (let i = 0; i < 500; i++) {
+                const progress = i / 500;
+                const noise = (1 - progress) * 0.3 * (Math.random() - 0.5);
+                let q = targetQ * progress + (1 - progress) * 0.3 + noise;
+                q = Math.max(0, Math.min(1.5, q));
+                fittingData.push(q);
+            }
+
+            iteration = 1e24;
+            currentQ = targetQ;
+            updateFittingDisplay();
+            drawFitting();
+        }
+
+        // 初始化拟合画布
+        drawFitting();
+
+        // ========== 大一统可视化 ==========
+        const unificationCanvas = document.getElementById('unification-canvas');
+        const unificationCtx = unificationCanvas.getContext('2d');
+        let energyScale = 3;
+
+        function resizeUnificationCanvas() {
+            unificationCanvas.width = unificationCanvas.parentElement.clientWidth;
+            unificationCanvas.height = unificationCanvas.parentElement.clientHeight;
+        }
+        resizeUnificationCanvas();
+        window.addEventListener('resize', resizeUnificationCanvas);
+
+        function drawUnification() {
+            const width = unificationCanvas.width;
+            const height = unificationCanvas.height;
+            const padding = 60;
+
+            unificationCtx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+            unificationCtx.fillRect(0, 0, width, height);
+
+            // 绘制坐标轴
+            unificationCtx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            unificationCtx.lineWidth = 1;
+            unificationCtx.beginPath();
+            unificationCtx.moveTo(padding, padding);
+            unificationCtx.lineTo(padding, height - padding);
+            unificationCtx.lineTo(width - padding, height - padding);
+            unificationCtx.stroke();
+
+            // 坐标轴标签
+            unificationCtx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            unificationCtx.font = '14px sans-serif';
+            unificationCtx.fillText('耦合常数强度', 10, padding - 10);
+            unificationCtx.fillText('能量标度 (GeV)', width - 150, height - 10);
+
+            // 能量刻度
+            for (let e = 2; e <= 19; e += 2) {
+                const x = padding + ((e - 2) / 17) * (width - 2 * padding);
+                unificationCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                unificationCtx.fillText(`10^${e}`, x - 15, height - padding + 20);
+            }
+
+            // 定义四种力的耦合常数曲线
+            const forces = [
+                {name: '强力', color: '#ff4444', startAlpha: 1, endAlpha: 0.04},
+                {name: '电磁力', color: '#44ff44', startAlpha: 0.007, endAlpha: 0.04},
+                {name: '弱力', color: '#4444ff', startAlpha: 0.03, endAlpha: 0.04},
+                {name: '引力', color: '#ffaa44', startAlpha: 0.00001, endAlpha: 0.04}
+            ];
+
+            // 绘制每种力的曲线
+            forces.forEach((force, forceIndex) => {
+                unificationCtx.strokeStyle = force.color;
+                unificationCtx.lineWidth = 3;
+                unificationCtx.beginPath();
+
+                for (let i = 0; i <= 100; i++) {
+                    const t = i / 100;
+                    const e = 2 + t * 17; // 能量从10^2到10^19
+                    const x = padding + t * (width - 2 * padding);
+
+                    // 计算耦合常数（简化模型）
+                    let alpha;
+                    const unificationPoint = 19;
+                    const unificationAlpha = 0.04;
+
+                    if (forceIndex === 0) { // 强力 - 渐近自由
+                        alpha = force.startAlpha * Math.exp(-0.15 * (e - 2));
+                        alpha = Math.max(alpha, unificationAlpha);
+                    } else if (forceIndex === 1) { // 电磁力 - 缓慢增大
+                        alpha = force.startAlpha * Math.exp(0.1 * (e - 2));
+                        alpha = Math.min(alpha, unificationAlpha);
+                    } else if (forceIndex === 2) { // 弱力
+                        alpha = force.startAlpha + (unificationAlpha - force.startAlpha) * Math.pow(t, 1.5);
+                    } else { // 引力
+                        alpha = force.startAlpha * Math.exp(0.5 * (e - 2));
+                        alpha = Math.min(alpha, unificationAlpha);
+                    }
+
+                    // 转换为画布坐标（对数刻度）
+                    const logAlpha = Math.log10(alpha);
+                    const minLog = -5;
+                    const maxLog = 0;
+                    const y = height - padding - ((logAlpha - minLog) / (maxLog - minLog)) * (height - 2 * padding);
+
+                    if (i === 0) {
+                        unificationCtx.moveTo(x, y);
+                    } else {
+                        unificationCtx.lineTo(x, y);
+                    }
+                }
+
+                unificationCtx.stroke();
+
+                // 图例
+                const legendY = padding + 30 + forceIndex * 25;
+                unificationCtx.fillStyle = force.color;
+                unificationCtx.fillRect(width - padding - 100, legendY - 10, 20, 3);
+                unificationCtx.fillText(force.name, width - padding - 70, legendY - 5);
+            });
+
+            // 绘制统一点
+            const unifyX = padding + (17 / 17) * (width - 2 * padding);
+            const unifyLogAlpha = Math.log10(0.04);
+            const unifyY = height - padding - ((unifyLogAlpha - (-5)) / (0 - (-5))) * (height - 2 * padding);
+
+            unificationCtx.beginPath();
+            unificationCtx.arc(unifyX, unifyY, 15, 0, Math.PI * 2);
+            unificationCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            unificationCtx.fill();
+            unificationCtx.strokeStyle = '#fff';
+            unificationCtx.lineWidth = 2;
+            unificationCtx.stroke();
+
+            unificationCtx.fillStyle = '#fff';
+            unificationCtx.font = 'bold 14px sans-serif';
+            unificationCtx.fillText('大一统点', unifyX - 35, unifyY - 25);
+            unificationCtx.font = '12px monospace';
+            unificationCtx.fillText('E* = 10¹⁹ GeV', unifyX - 45, unifyY + 35);
+
+            // 当前能量标记
+            const currentX = padding + ((energyScale - 2) / 17) * (width - 2 * padding);
+            unificationCtx.strokeStyle = 'rgba(0, 245, 255, 0.8)';
+            unificationCtx.setLineDash([5, 5]);
+            unificationCtx.beginPath();
+            unificationCtx.moveTo(currentX, padding);
+            unificationCtx.lineTo(currentX, height - padding);
+            unificationCtx.stroke();
+            unificationCtx.setLineDash([]);
+
+            unificationCtx.fillStyle = 'rgba(0, 245, 255, 1)';
+            unificationCtx.fillText(`当前: 10^${energyScale.toFixed(1)} GeV`, currentX - 50, padding - 5);
+        }
+
+        function updateUnification() {
+            energyScale = parseFloat(document.getElementById('energy-scale').value);
+            document.getElementById('energy-value').textContent = energyScale.toFixed(1);
+            drawUnification();
+        }
+
+        let unificationAnimating = false;
+        function animateUnification() {
+            if (unificationAnimating) return;
+            unificationAnimating = true;
+
+            let currentEnergy = 2;
+            const targetEnergy = 19;
+
+            function animate() {
+                currentEnergy += 0.1;
+                if (currentEnergy > targetEnergy) {
+                    currentEnergy = targetEnergy;
+                    unificationAnimating = false;
+                }
+
+                energyScale = currentEnergy;
+                document.getElementById('energy-scale').value = currentEnergy;
+                document.getElementById('energy-value').textContent = currentEnergy.toFixed(1);
+                drawUnification();
+
+                if (unificationAnimating) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            animate();
+        }
+
+        // 初始化大一统画布
+        drawUnification();
+
+        // ========== 平滑滚动 ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========== 粒子效果 ==========
+        function createParticles() {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 10 + 5 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 255, ${Math.random() * 0.3})`;
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        console.log('🥒 尖黄瓜宇宙模型网站已加载完成！');
+        console.log('Q = 0.7321858...');
+        console.log('2026诺贝尔物理学奖 - 刘睿阳 & 王兮成');
+    </script>
+</body>
+</html>
